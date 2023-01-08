@@ -1,0 +1,14 @@
+.box{
+    overflow: hidden;
+
+}
+
+.img-holder {
+transform: all 100s ease;
+
+}
+
+.img-holder:hover {
+    transform:scale(1.5);
+    
+}
