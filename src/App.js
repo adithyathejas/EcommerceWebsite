@@ -1,7 +1,13 @@
 import "./App.css";
 import NavBar from "./components/Navbar";
 import Store from "./components/Store";
+import { useState } from "react";
+import Cart from './components/Cart'
+import CartProvider from "./components/Store/Cart-Provider";
 const App = () => {
+
+  const [cartOpen,setCartOpen]=useState(false)
+
   const productsArr = [
     {
       title: "Colors",
@@ -40,11 +46,16 @@ const App = () => {
     },
   ];
 
+  const CartHandler = () => {
+    setCartOpen(!cartOpen)
+  }
+
   return (
-    <>
-      <NavBar></NavBar>
+    <CartProvider>
+      <NavBar onClick={CartHandler}></NavBar>
+      <Cart cartOpen={cartOpen} cartHandler={CartHandler}/>
       <Store products={productsArr}></Store>
-    </>
+    </CartProvider>
   );
 };
 
