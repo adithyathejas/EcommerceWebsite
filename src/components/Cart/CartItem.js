@@ -1,4 +1,4 @@
-import CartContext from "./Store/Cart-Context.js";
+import CartContext from "../Store/Cart-Context.js";
 import { useContext } from "react";
 import Image from "react-bootstrap/Image";
 import { Col, Row } from "react-bootstrap";

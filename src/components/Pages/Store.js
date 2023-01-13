@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import Box from "./UI/Box";
+import Box from "../UI/Box";
 
 let Store = (props) => {
     const products = props.products.map( (item) => {
@@ -14,6 +14,7 @@ let Store = (props) => {
            {products}
           
         </Row>
+        {console.log('hi')}
       </Container>
     </>
   );

@@ -1,9 +1,14 @@
 import "./App.css";
 import NavBar from "./components/Navbar";
-import Store from "./components/Store";
+import Store from "./components/Pages/Store";
 import { useState } from "react";
-import Cart from './components/Cart'
+import Cart from './components/Cart/Cart'
 import CartProvider from "./components/Store/Cart-Provider";
+import { Route,Link } from "react-router-dom";
+import About from "./components/Pages/About";
+
+
+
 const App = () => {
 
   const [cartOpen,setCartOpen]=useState(false)
@@ -51,11 +56,22 @@ const App = () => {
   }
 
   return (
-    <CartProvider>
-      <NavBar onClick={CartHandler}></NavBar>
+      <>
+      
+      <CartProvider>
       <Cart cartOpen={cartOpen} cartHandler={CartHandler}/>
-      <Store products={productsArr}></Store>
-    </CartProvider>
+      <NavBar onClick={CartHandler}></NavBar>
+      <Route path="/Store">
+      <Store  products={productsArr}></Store>
+      </Route>
+      <Route path="/About">
+      <About></About>
+      </Route>
+      
+      </CartProvider>
+      
+      </>
+    
   );
 };
 

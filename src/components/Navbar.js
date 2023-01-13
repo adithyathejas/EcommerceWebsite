@@ -8,6 +8,7 @@ import { BsFillCartFill } from "react-icons/bs";
 import { useContext } from "react";
 import CartContext from "./Store/Cart-Context";
 import Row from 'react-bootstrap/Row'
+import { NavLink } from "react-router-dom";
 
 
 const NavBar = (props)=>{
@@ -27,12 +28,13 @@ const NavBar = (props)=>{
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#link">Store</Nav.Link>
-                <Nav.Link href="#link">About</Nav.Link>
+                <Nav.Link to="/store">Home</Nav.Link>
+                <NavLink className='nav-link '  activeClassName="nav-tabs" to="/Store">Store</NavLink>
+                <NavLink className='nav-link '  activeClassName="nav-tabs" to="/About">About</NavLink>
               </Nav>
               <Nav>
                 <Container>
+                  {console.log('NavBar')}
                 <Row><Button variant="primary" onClick={props.onClick}><BsFillCartFill/><Badge bg="primary" pill>{badgeNum}</Badge></Button></Row>
                 </Container>
                 
