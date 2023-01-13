@@ -6,6 +6,7 @@ import Cart from './components/Cart/Cart'
 import CartProvider from "./components/Store/Cart-Provider";
 import { Route,Link } from "react-router-dom";
 import About from "./components/Pages/About";
+import Home from "./components/Pages/Home";
 
 
 
@@ -66,6 +67,9 @@ const App = () => {
       </Route>
       <Route path="/About">
       <About></About>
+      </Route>
+      <Route path="/Home" >
+      <Home></Home>
       </Route>
       
       </CartProvider>

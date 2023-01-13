@@ -28,7 +28,7 @@ const NavBar = (props)=>{
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link to="/store">Home</Nav.Link>
+              <NavLink className='nav-link'  activeClassName="nav-tabs" to="/Home">Home</NavLink>
                 <NavLink className='nav-link '  activeClassName="nav-tabs" to="/Store">Store</NavLink>
                 <NavLink className='nav-link '  activeClassName="nav-tabs" to="/About">About</NavLink>
               </Nav>
@@ -40,7 +40,6 @@ const NavBar = (props)=>{
                 
               
           </Nav>
-
             </Navbar.Collapse>
           </Container>
         </Navbar>
