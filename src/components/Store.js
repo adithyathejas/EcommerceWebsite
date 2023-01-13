@@ -4,7 +4,7 @@ import Box from "./UI/Box";
 
 let Store = (props) => {
     const products = props.products.map( (item) => {
-        return <Box title={item.title} price={item.price} image={item.imageUrl}></Box>
+        return <Box key={item.title} item={item}></Box>
     } 
     )
   return (

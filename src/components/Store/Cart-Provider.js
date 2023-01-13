@@ -5,13 +5,14 @@ const CartProvider = props => {
     const [items,setItems] = useState([])
 
     const addItemToCartHandler = item => {
-        const ItemIndex = items.findIndex(x=>x.id===item.id)
+        const ItemIndex = items.findIndex(x=>x.title===item.title)
         if(ItemIndex ===-1 ){
-            setItems([...items,item])
+            let newItem= {...item,quantity:1}
+            setItems([...items,newItem])
         }
         else{
             let existingItem = items[ItemIndex]
-            let newItem = {...existingItem,quantity:Number(existingItem.quantity)}
+            let newItem = {...existingItem,quantity:Number(existingItem.quantity)+1}
             console.log(items)
             setItems([...items.slice(0,ItemIndex),newItem,...items.slice(ItemIndex+1)])
 
@@ -19,7 +20,7 @@ const CartProvider = props => {
         }
 
         const removeItemFromHandler = id =>{
-            const ItemIndex = items.findIndex(x=>x.id===id)
+            const ItemIndex = items.findIndex(x=>x.title===id)
             let existingItem = items[ItemIndex]
             if(existingItem.quantity>1){
                 let newItem = {...existingItem,quantity:Number(existingItem.quantity)-1}

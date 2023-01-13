@@ -1,57 +1,22 @@
 import CartItem from "./CartItem";
 import Modal from 'react-bootstrap/Modal';
 import { Button, Container, Row } from "react-bootstrap";
+import { useContext } from "react";
+import CartContext from "./Store/Cart-Context";
 
 
 const Cart = (props) => {
  
 
   const handleClose = props.cartHandler
+  const cartCtx = useContext(CartContext)
 
-  const cartElements = [
+  
 
-    {
-    
-    title: 'Colors',
-    
-    price: 100,
-    
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
-    
-    quantity: 2,
-    
-    },
-    
-    {
-    
-    title: 'Black and white Colors',
-    
-    price: 50,
-    
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
-    
-    quantity: 3,
-    
-    },
-    
-    {
-    
-    title: 'Yellow and Black Colors',
-    
-    price: 70,
-    
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
-    
-    quantity: 1,
-    
-    }
-    
-    ]
-
-    const CartItems = cartElements.map(
+    const CartItems = cartCtx.items.map(
       (item) => {
         
-         return <CartItem key={item.id} item={item}></CartItem>
+         return <CartItem key={item.title} item={item}></CartItem>
          
       }
     );

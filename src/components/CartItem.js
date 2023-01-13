@@ -9,7 +9,7 @@ const CartItem = (props) => {
   const cartCtx = useContext(CartContext);
   const removeItemFromCart = (event) => {
     event.preventDefault();
-    cartCtx.removeItem(item.id);
+    cartCtx.removeItem(item.title);
   };
 
   return (
