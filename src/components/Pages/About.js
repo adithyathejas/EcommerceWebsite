@@ -1,6 +1,5 @@
 import { Col, Container, Image, Row } from "react-bootstrap";
-import React, { useState } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
+
 
 const About = () => {
   return (
