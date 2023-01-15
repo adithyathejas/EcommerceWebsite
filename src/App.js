@@ -1,13 +1,14 @@
 import "./App.css";
 import NavBar from "./components/Navbar";
 import Store from "./components/Pages/Store";
-import { useState } from "react";
+import { useState,useRef } from "react";
 import Cart from './components/Cart/Cart'
 import CartProvider from "./components/Store/Cart-Provider";
 import { Route} from "react-router-dom";
 import About from "./components/Pages/About";
 import Home from "./components/Pages/Home";
 import Button from "react-bootstrap/Button"
+import { InputGroup } from "react-bootstrap";
 
 
 const App = () => {
@@ -15,6 +16,10 @@ const App = () => {
   const [cartOpen,setCartOpen]=useState(false)
   const [movies,setMovies]=useState([])
   const [isLoading,setIsLoading]=useState(false)  
+  const [error,setError]=useState(null)
+  // const [isCancelled,setIsCancelled]=useState(false)
+  const cancelled = useRef(false)
+  let timeoutID = 0
 
   // const productsArr = [
   //   {
@@ -56,8 +61,15 @@ const App = () => {
 
   async function MovieFetchHandler(){
     setIsLoading(true)
-    const response = await fetch('https://swapi.dev/api/films/')
-    console.log(response)
+    setError(null)
+    try{
+      const response = await fetch('https://swapi.dev/api/film/')
+      console.log(response)
+      if(!response.ok){
+        throw new Error('Something went wrong...retrying') 
+      }
+    
+    
     const data = await response.json()
 
     const transformedMovies = data.results.map((movieData)=>{
@@ -70,10 +82,37 @@ const App = () => {
     })
 
     setMovies(transformedMovies)
-    setIsLoading(false)
     console.log(121)
 
+  }catch(Error){
+
+    setError(Error.message)
+   
   }
+  setIsLoading(false)
+  console.log(cancelled)
+  if(!cancelled.current){
+   timeoutID=setTimeout(MovieFetchHandler,5000)
+   }
+  
+}
+
+
+
+async function cancelFetchHandler(){
+  clearTimeout(timeoutID)
+  cancelled.current=true
+  console.log('cancelled')
+  console.log(cancelled)
+  setError('search cancelled')
+
+}
+
+function startFetchHandler(){
+  cancelled.current=false
+  MovieFetchHandler()
+  
+}
 
   const CartHandler = () => {
     setCartOpen(!cartOpen)
@@ -81,12 +120,12 @@ const App = () => {
 
   return (
       <>
-      <Button onClick={MovieFetchHandler}>Load Page</Button>
+      <InputGroup><Button onClick={startFetchHandler}  >Load Page</Button><Button onClick={cancelFetchHandler}>Cancel</Button></InputGroup>
       <CartProvider>
       <Cart cartOpen={cartOpen} cartHandler={CartHandler}/>
       <NavBar onClick={CartHandler}></NavBar>
       <Route path="/Store">
-      <Store products={movies} isLoading={isLoading}></Store>
+      <Store products={movies} isLoading={isLoading} error={error}></Store>
       {console.log(movies)}
       </Route>
       <Route path="/About">
