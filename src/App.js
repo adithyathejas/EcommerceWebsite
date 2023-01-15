@@ -14,6 +14,7 @@ const App = () => {
 
   const [cartOpen,setCartOpen]=useState(false)
   const [movies,setMovies]=useState([])
+  const [isLoading,setIsLoading]=useState(false)  
 
   // const productsArr = [
   //   {
@@ -54,6 +55,7 @@ const App = () => {
   // ];
 
   async function MovieFetchHandler(){
+    setIsLoading(true)
     const response = await fetch('https://swapi.dev/api/films/')
     console.log(response)
     const data = await response.json()
@@ -68,6 +70,8 @@ const App = () => {
     })
 
     setMovies(transformedMovies)
+    setIsLoading(false)
+    console.log(121)
 
   }
 
@@ -82,7 +86,7 @@ const App = () => {
       <Cart cartOpen={cartOpen} cartHandler={CartHandler}/>
       <NavBar onClick={CartHandler}></NavBar>
       <Route path="/Store">
-      <Store products={movies}></Store>
+      <Store products={movies} isLoading={isLoading}></Store>
       {console.log(movies)}
       </Route>
       <Route path="/About">
