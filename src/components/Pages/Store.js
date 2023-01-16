@@ -13,7 +13,7 @@ let Store = (props) => {
 
   return (
     <>
-      <Row className="mt-3 ms-5 me-5">{props.children}</Row>  
+      <Row className="mt-3 ms-5 me-5">{products.length===0&&props.children}</Row>  
       <Container fluid className="mt-3 d-flex justify-content-around ">
       
         <Row>    

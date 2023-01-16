@@ -1,7 +1,8 @@
+import React, { useCallback } from "react";
 import "./App.css";
 import NavBar from "./components/Navbar";
 import Store from "./components/Pages/Store";
-import { useState,useRef } from "react";
+import { useState,useRef, useEffect } from "react";
 import Cart from './components/Cart/Cart'
 import CartProvider from "./components/Store/Cart-Provider";
 import { Route} from "react-router-dom";
@@ -19,7 +20,7 @@ const App = () => {
   const [error,setError]=useState(null)
   // const [isCancelled,setIsCancelled]=useState(false)
   const cancelled = useRef(false)
-  let timeoutID = 0
+  let timeoutID = useRef(0)
 
   // const productsArr = [
   //   {
@@ -59,7 +60,10 @@ const App = () => {
   //   },
   // ];
 
-  async function MovieFetchHandler(){
+  useEffect(()=>{fetchMovies()},[])
+console.log('app')
+
+ const fetchMovies= async function MovieFetchHandler(){
     setIsLoading(true)
     setError(null)
     try{
@@ -87,32 +91,36 @@ const App = () => {
   }catch(Error){
 
     setError(Error.message)
+    if(!cancelled.current){
+      timeoutID.current=setTimeout(MovieFetchHandler,5000)
+      console.log('last timer:',timeoutID)
+      }
    
   }
   setIsLoading(false)
   console.log(cancelled)
-  if(!cancelled.current){
-   timeoutID=setTimeout(MovieFetchHandler,5000)
-   }
+  
   
 }
 
 
-
-async function cancelFetchHandler(){
-  clearTimeout(timeoutID)
+function cancelFetchHandler(){
+    clearTimeout(timeoutID.current)
+    console.log('canceller timer',timeoutID.current)
   cancelled.current=true
   console.log('cancelled')
   console.log(cancelled)
   setError('search cancelled')
-
-}
-
-function startFetchHandler(){
-  cancelled.current=false
-  MovieFetchHandler()
   
+
 }
+
+// function startFetchHandler(){
+//   cancelled.current=false
+//   clearTimeout()
+//   MovieFetchHandler()
+  
+// }
 
   const CartHandler = () => {
     setCartOpen(!cartOpen)
@@ -120,12 +128,11 @@ function startFetchHandler(){
 
   return (
       <>
-      <InputGroup><Button onClick={startFetchHandler}  >Load Page</Button><Button onClick={cancelFetchHandler}>Cancel</Button></InputGroup>
       <CartProvider>
       <Cart cartOpen={cartOpen} cartHandler={CartHandler}/>
       <NavBar onClick={CartHandler}></NavBar>
       <Route path="/Store">
-      <Store products={movies} isLoading={isLoading} error={error}></Store>
+      <Store products={movies} isLoading={isLoading} error={error}><Button onClick={cancelFetchHandler}>Cancel Search</Button></Store>
       {console.log(movies)}
       </Route>
       <Route path="/About">
@@ -142,4 +149,4 @@ function startFetchHandler(){
   );
 };
 
-export default App;
+export default React.memo(App);
