@@ -10,6 +10,7 @@ import About from "./components/Pages/About";
 import Home from "./components/Pages/Home";
 import Button from "react-bootstrap/Button"
 import { InputGroup } from "react-bootstrap";
+import ContactUS from "./components/Pages/ContactUS";
 
 
 const App = () => {
@@ -91,10 +92,10 @@ console.log('app')
   }catch(Error){
 
     setError(Error.message)
-    if(!cancelled.current){
-      timeoutID.current=setTimeout(MovieFetchHandler,5000)
-      console.log('last timer:',timeoutID)
-      }
+    // if(!cancelled.current){
+    //   timeoutID.current=setTimeout(MovieFetchHandler,5000)
+    //   console.log('last timer:',timeoutID)
+    //   }
    
   }
   setIsLoading(false)
@@ -140,6 +141,9 @@ function cancelFetchHandler(){
       </Route>
       <Route path="/Home" >
       <Home></Home>
+      </Route>
+      <Route path="/ContactUS" >
+      <ContactUS></ContactUS>
       </Route>
       
       </CartProvider>
