@@ -2,7 +2,7 @@ import Modal from 'react-bootstrap/Modal';
 import { Button, Container, Row } from "react-bootstrap";
 
 const ModalUI = (props)=> {
-    const handleClose = props.cartHandler
+    const handleClose = props.ModalHandler
    
    return (<Modal show={props.Show} onHide={handleClose}>
     <Modal.Header closeButton>

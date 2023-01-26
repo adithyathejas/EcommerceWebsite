@@ -3,6 +3,11 @@ import CartContext from "./Cart-Context"
 
 const CartProvider = props => {
     const [items,setItems] = useState([])
+    const [cartOpen,setCartOpen]=useState(false)
+
+    const CartHandler = () => {
+        setCartOpen(!cartOpen)
+      }
 
     const addItemToCartHandler = item => {
         const ItemIndex = items.findIndex(x=>x.title===item.title)
@@ -35,7 +40,10 @@ const CartProvider = props => {
             items:items,
             toatalAmount:0,
             addItem: addItemToCartHandler,
-            removeItem:removeItemFromHandler
+            removeItem:removeItemFromHandler,
+            cartState: cartOpen,
+            CartHandle:CartHandler
+
             
         }
 

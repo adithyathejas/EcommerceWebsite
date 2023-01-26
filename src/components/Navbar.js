@@ -25,18 +25,19 @@ const NavBar = (props)=>{
         <Navbar  variant="dark" bg='dark' expand="lg" >
           <Container fluid>
             <Navbar.Brand href="#home">MOVIE ARCHEVE</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Toggle aria-controls="basic-navbar-nav nav-tabs" />
             <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-              <NavLink className='nav-link'  activeClassName="nav-tabs" to="/Home">Home</NavLink>
-                <NavLink className='nav-link '  activeClassName="nav-tabs" to="/Store">Store</NavLink>
-                <NavLink className='nav-link '  activeClassName="nav-tabs" to="/About">About</NavLink>
-                <NavLink className='nav-link '  activeClassName="nav-tabs" to="/ContactUS">Contact US </NavLink>
+              <Nav className="me-auto ">
+              {/* <NavLink className='nav-link'   to="/Home">Home</NavLink> */}
+              <NavLink className='nav-link'  to="Home">Home</NavLink>
+                <NavLink className='nav-link '   to="Store">Store</NavLink>
+                <NavLink className='nav-link '  to="About">About</NavLink>
+                <NavLink className='nav-link '   to="ContactUS">Contact US </NavLink>
               </Nav>
               <Nav>
                 <Container>
                   {console.log('NavBar')}
-                <Row><Button variant="primary" onClick={props.onClick}><BsFillCartFill/><Badge bg="primary" pill>{badgeNum}</Badge></Button></Row>
+                <Row><Button variant="primary" onClick={cartCtx.CartHandle}><BsFillCartFill/><Badge bg="primary" pill>{badgeNum}</Badge></Button></Row>
                 </Container>
                 
               

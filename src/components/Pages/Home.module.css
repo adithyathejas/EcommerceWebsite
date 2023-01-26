@@ -1,6 +1,6 @@
 .carousel {
-    width:500px;
-    height:500px;
+    width:5px;
+    height:300px;
     margin: auto;
   }
 
@@ -9,3 +9,8 @@
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
   }
+  .carousel > .item > img {
+    width: 300px;
+    height:300px;
+    justify-content: center;
+}

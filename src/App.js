@@ -1,155 +1,152 @@
-import React, { useCallback } from "react";
+import React  from "react";
 import "./App.css";
-import NavBar from "./components/Navbar";
 import Store from "./components/Pages/Store";
-import { useState,useRef, useEffect } from "react";
-import Cart from './components/Cart/Cart'
+import { useState, useRef, useEffect } from "react";
+import Cart from "./components/Cart/Cart";
 import CartProvider from "./components/Store/Cart-Provider";
-import { Route} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import About from "./components/Pages/About";
 import Home from "./components/Pages/Home";
-import Button from "react-bootstrap/Button"
-import { InputGroup } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 import ContactUS from "./components/Pages/ContactUS";
-
+import Root from "./components/Pages/Root";
+import ErrorPage from "./components/Pages/ErrorPage";
+import ProductDetail from "./components/Pages/ProductDetail";
 
 const App = () => {
-
-  const [cartOpen,setCartOpen]=useState(false)
-  const [movies,setMovies]=useState([])
-  const [isLoading,setIsLoading]=useState(false)  
-  const [error,setError]=useState(null)
+  // const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   // const [isCancelled,setIsCancelled]=useState(false)
-  const cancelled = useRef(false)
-  let timeoutID = useRef(0)
+  const cancelled = useRef(false);
+  let timeoutID = useRef(0);
 
-  // const productsArr = [
-  //   {
-  //     title: "Colors",
+  const productsArr = [
+    {
+      id: '001' ,
 
-  //     price: 100,
+      title: "Colors",
 
-  //     imageUrl:
-  //       "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-  //   },
+      price: 100,
 
-  //   {
-  //     title: "Black and white Colors",
+      imageUrl:
+        "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
+    },
 
-  //     price: 50,
+    {
+      id: '002',
 
-  //     imageUrl:
-  //       "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-  //   },
+      title: "Black and white Colors",
 
-  //   {
-  //     title: "Yellow and Black Colors",
+      price: 50,
 
-  //     price: 70,
+      imageUrl:
+        "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
+    },
 
-  //     imageUrl:
-  //       "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-  //   },
+    {
+      id: '003',
 
-  //   {
-  //     title: "Blue Color",
+      title: "Yellow and Black Colors",
 
-  //     price: 100,
+      price: 70,
 
-  //     imageUrl:
-  //       "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
-  //   },
-  // ];
+      imageUrl:
+        "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
+    },
 
-  useEffect(()=>{fetchMovies()},[])
-console.log('app')
+    { 
+      id:'004',
+      
+      title: "Blue Color",
 
- const fetchMovies= async function MovieFetchHandler(){
-    setIsLoading(true)
-    setError(null)
-    try{
-      const response = await fetch('https://swapi.dev/api/film/')
-      console.log(response)
-      if(!response.ok){
-        throw new Error('Something went wrong...retrying') 
-      }
-    
-    
-    const data = await response.json()
+      price: 100,
 
-    const transformedMovies = data.results.map((movieData)=>{
-      return {
-        id: movieData.episode_id,
-        title: movieData.title,
-        openingText: movieData.opening_crawl,
-        releaseDate:movieData.release_date,
-      }
-    })
+      imageUrl:
+        "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
+    },
+  ];
 
-    setMovies(transformedMovies)
-    console.log(121)
+  // useEffect(() => {
+  //   fetchMovies();
+  // }, []);
+  // console.log("app");
 
-  }catch(Error){
+  // const fetchMovies = async function MovieFetchHandler() {
+  //   setIsLoading(true);
+  //   setError(null);
+  //   try {
+  //     const response = await fetch("https://swapi.dev/api/films/");
+  //     console.log(response);
+  //     if (!response.ok) {
+  //       throw new Error("Something went wrong...retrying");
+  //     }
 
-    setError(Error.message)
-    // if(!cancelled.current){
-    //   timeoutID.current=setTimeout(MovieFetchHandler,5000)
-    //   console.log('last timer:',timeoutID)
-    //   }
-   
-  }
-  setIsLoading(false)
-  console.log(cancelled)
-  
-  
-}
+  //     const data = await response.json();
+
+  //     const transformedMovies = data.results.map((movieData) => {
+  //       return {
+  //         id: movieData.episode_id,
+  //         title: movieData.title,
+  //         openingText: movieData.opening_crawl,
+  //         releaseDate: movieData.release_date,
+  //       };
+  //     });
+
+  //     setMovies(transformedMovies);
+  //     console.log(121);
+  //   } catch (Error) {
+  //     setError(Error.message);
+  //     // if(!cancelled.current){
+  //     //   timeoutID.current=setTimeout(MovieFetchHandler,5000)
+  //     //   console.log('last timer:',timeoutID)
+  //     //   }
+  //   }
+  //   setIsLoading(false);
+  //   console.log(cancelled);
+  // };
+
+  // function cancelFetchHandler() {
+  //   clearTimeout(timeoutID.current);
+  //   console.log("canceller timer", timeoutID.current);
+  //   cancelled.current = true;
+  //   console.log("cancelled");
+  //   console.log(cancelled);
+  //   setError("search cancelled");
+  // }
+
+  // function startFetchHandler(){
+  //   cancelled.current=false
+  //   clearTimeout()
+  //   MovieFetchHandler()
+
+  // }
 
 
-function cancelFetchHandler(){
-    clearTimeout(timeoutID.current)
-    console.log('canceller timer',timeoutID.current)
-  cancelled.current=true
-  console.log('cancelled')
-  console.log(cancelled)
-  setError('search cancelled')
-  
-
-}
-
-// function startFetchHandler(){
-//   cancelled.current=false
-//   clearTimeout()
-//   MovieFetchHandler()
-  
-// }
-
-  const CartHandler = () => {
-    setCartOpen(!cartOpen)
-  }
+  const router=createBrowserRouter([
+    {
+      path: "/",
+      element: <Root/>,
+      errorElement: <ErrorPage/>,
+      children: [
+        { path: "/", element: <Home /> },
+        { path: "/Home", element: <Home /> },
+        { path: "About", element: <About /> },
+        { path: "Store", element: <Store products={productsArr} isLoading={isLoading} error={error}/>},
+        { path: "ContactUS", element: <ContactUS/> },
+        {path: 'Store/:productId',element: <ProductDetail/>}
+      ],
+     
+    },
+  ])
 
   return (
-      <>
+    <>
       <CartProvider>
-      <Cart cartOpen={cartOpen} cartHandler={CartHandler}/>
-      <NavBar onClick={CartHandler}></NavBar>
-      <Route path="/Store">
-      <Store products={movies} isLoading={isLoading} error={error}><Button onClick={cancelFetchHandler}>Cancel Search</Button></Store>
-      {console.log(movies)}
-      </Route>
-      <Route path="/About">
-      <About></About>
-      </Route>
-      <Route path="/Home" >
-      <Home></Home>
-      </Route>
-      <Route path="/ContactUS" >
-      <ContactUS></ContactUS>
-      </Route>
-      
+        <Cart/>
+        <RouterProvider router={router}/>
       </CartProvider>
-      
-      </>
-    
+    </>
   );
 };
 

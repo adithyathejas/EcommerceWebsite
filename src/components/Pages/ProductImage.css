@@ -1,0 +1,17 @@
+.image{
+    width: 500px;
+    height: 500px;
+    top: 50%;
+    left: 50%;
+    padding: 2px;
+    
+    
+}
+
+.image:hover {
+    -moz-transform: scale(3);
+  -webkit-transform: scale(3);
+  transform: scale(3);
+  translate: 50%;
+
+}

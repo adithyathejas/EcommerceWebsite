@@ -8,8 +8,6 @@ import ModalUI from "../UI/ModalUI";
 
 const Cart = (props) => {
  
-
-  const handleClose = props.cartHandler
   const cartCtx = useContext(CartContext)
 
   
@@ -24,7 +22,7 @@ const Cart = (props) => {
 
 
     return (
-      <ModalUI cartHandler={handleClose} Show={props.cartOpen}>
+      <ModalUI ModalHandler={cartCtx.CartHandle} Show={cartCtx.cartState}>
           {CartItems}
          </ModalUI>
     )
