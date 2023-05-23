@@ -18,6 +18,7 @@ export const AuthContextProvider = (props) => {
   const logoutHandler = () => {
     setToken(null);
     localStorage.removeItem('token')
+    localStorage.removeItem('setupTime')
   };
   const timeoutHandler=()=>{
     let min=5*60*1000;

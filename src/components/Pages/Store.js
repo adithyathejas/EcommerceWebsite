@@ -1,8 +1,20 @@
 import React from "react";
-import { Container, Row, Spinner } from "react-bootstrap";
+import { Container, Row} from "react-bootstrap";
+import { useNavigate} from "react-router-dom";
+import AuthContext from "../Store/Auth-Context"
+import { useEffect,useContext} from "react";
 import Box from "../UI/Box";
 
+
 let Store = (props) => {
+  const authCtx = useContext(AuthContext)
+  const navigate = useNavigate()
+  useEffect(() => {
+    if(!authCtx.isLoggedIn){
+      navigate("/Login",{replace:true})
+    }
+   
+  }, [authCtx.isLoggedIn]);
     const products = props.products.map( (item) => {
         return <Box key={item.title} item={item}></Box>
     } 
