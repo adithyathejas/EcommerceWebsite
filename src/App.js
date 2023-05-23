@@ -12,6 +12,8 @@ import ContactUS from "./components/Pages/ContactUS";
 import Root from "./components/Pages/Root";
 import ErrorPage from "./components/Pages/ErrorPage";
 import ProductDetail from "./components/Pages/ProductDetail";
+import LoginForm from "./components/Pages/Auth/Login";
+import { AuthContextProvider } from "./components/Store/Auth-Context";
 
 const App = () => {
   // const [movies, setMovies] = useState([]);
@@ -134,7 +136,8 @@ const App = () => {
         { path: "About", element: <About /> },
         { path: "Store", element: <Store products={productsArr} isLoading={isLoading} error={error}/>},
         { path: "ContactUS", element: <ContactUS/> },
-        {path: 'Store/:productId',element: <ProductDetail/>}
+        {path: 'Store/:productId',element: <ProductDetail/>},
+        {path: "Login",element:<LoginForm/>}
       ],
      
     },
@@ -142,10 +145,12 @@ const App = () => {
 
   return (
     <>
+    <AuthContextProvider>
       <CartProvider>
         <Cart/>
         <RouterProvider router={router}/>
       </CartProvider>
+      </AuthContextProvider>
     </>
   );
 };
