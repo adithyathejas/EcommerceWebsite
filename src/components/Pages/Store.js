@@ -4,17 +4,29 @@ import { useNavigate} from "react-router-dom";
 import AuthContext from "../Store/Auth-Context"
 import { useEffect,useContext} from "react";
 import Box from "../UI/Box";
+import CartContext from "../Store/Cart-Context";
+import axios from 'axios'
 
 
-let Store = (props) => {
+let Store =  (props) => {
+  const cartCtx=useContext(CartContext)
   const authCtx = useContext(AuthContext)
   const navigate = useNavigate()
-  useEffect(() => {
-    if(!authCtx.isLoggedIn){
-      navigate("/Login",{replace:true})
+  const _id=localStorage.getItem('userID')
+  useEffect( () => {
+    async function fetchdata(){
+      if(!authCtx.isLoggedIn){
+        navigate("/Login",{replace:true})
+      }
+      else{
+        cartCtx.cartSync()
+      }
     }
+   fetchdata();
+    
    
   }, [authCtx.isLoggedIn]);
+  
     const products = props.products.map( (item) => {
         return <Box key={item.title} item={item}></Box>
     } 

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from 'axios'
+import { useEffect } from "react";
 const AuthContext = React.createContext({
   token: "",
   isLoggedIn: false,
@@ -8,17 +10,31 @@ const AuthContext = React.createContext({
 });
 
 export const AuthContextProvider = (props) => {
-  const initialToken=localStorage.getItem('token')
+  const initialToken=localStorage.getItem('token');
+  const loggedInEmail=localStorage.getItem('email');
   const [token, setToken] = useState(initialToken);
+  const [email,setEmail]=useState(loggedInEmail)
   const userIsloggedIn = !!token;
-  const loginHandler = (token) => {
+  const loginHandler = async (token,email) => {
+   //code to clean email
+   
+    //storing to localstorage
     setToken(token);
+    setEmail(email);
+    localStorage.setItem('email',email) 
+    try{   
+        let response = await axios.post('https://crudcrud.com/api/9a3c7c465c5a4ad695e97f7f29c54c80/Cart',{id:email,items:[]})
+        let data=response.data
+        localStorage.setItem('userID',data._id)
+    }
+    catch(e){
+      console.error(e.message)
+    }
     localStorage.setItem('token',token)
   };
   const logoutHandler = () => {
     setToken(null);
-    localStorage.removeItem('token')
-    localStorage.removeItem('setupTime')
+    localStorage.clear()
   };
   const timeoutHandler=()=>{
     let min=5*60*1000;
@@ -38,6 +54,7 @@ export const AuthContextProvider = (props) => {
 
   const contextValue = {
     token: token,
+    email:email,
     isLoggedIn: userIsloggedIn,
     login: loginHandler,
     logout: logoutHandler,

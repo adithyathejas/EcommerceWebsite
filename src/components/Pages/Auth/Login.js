@@ -38,7 +38,7 @@ const LoginForm = () => {
       }).then(res=>{
         if(res.ok){
          
-          res.json().then(data=>{console.log(data.idToken);authCtx.login(data.idToken);navigate('/Store',{replace:true})})
+          res.json().then(data=>{console.log(data.idToken,data.email);authCtx.login(data.idToken,data.email);navigate('/Store',{replace:true})})
 
         }else{
           res.json().then(data=>{

@@ -69,60 +69,7 @@ const App = () => {
     },
   ];
 
-  // useEffect(() => {
-  //   fetchMovies();
-  // }, []);
-  // console.log("app");
-
-  // const fetchMovies = async function MovieFetchHandler() {
-  //   setIsLoading(true);
-  //   setError(null);
-  //   try {
-  //     const response = await fetch("https://swapi.dev/api/films/");
-  //     console.log(response);
-  //     if (!response.ok) {
-  //       throw new Error("Something went wrong...retrying");
-  //     }
-
-  //     const data = await response.json();
-
-  //     const transformedMovies = data.results.map((movieData) => {
-  //       return {
-  //         id: movieData.episode_id,
-  //         title: movieData.title,
-  //         openingText: movieData.opening_crawl,
-  //         releaseDate: movieData.release_date,
-  //       };
-  //     });
-
-  //     setMovies(transformedMovies);
-  //     console.log(121);
-  //   } catch (Error) {
-  //     setError(Error.message);
-  //     // if(!cancelled.current){
-  //     //   timeoutID.current=setTimeout(MovieFetchHandler,5000)
-  //     //   console.log('last timer:',timeoutID)
-  //     //   }
-  //   }
-  //   setIsLoading(false);
-  //   console.log(cancelled);
-  // };
-
-  // function cancelFetchHandler() {
-  //   clearTimeout(timeoutID.current);
-  //   console.log("canceller timer", timeoutID.current);
-  //   cancelled.current = true;
-  //   console.log("cancelled");
-  //   console.log(cancelled);
-  //   setError("search cancelled");
-  // }
-
-  // function startFetchHandler(){
-  //   cancelled.current=false
-  //   clearTimeout()
-  //   MovieFetchHandler()
-
-  // }
+ 
 
 
   const router=createBrowserRouter([

@@ -7,7 +7,8 @@ const CartContext = React.createContext({
     addItem: item =>{},
     removeItem:(id)=>{},
     cartState: null,
-    CartHandle:()=>{}
+    CartHandle:()=>{},
+    cartSync:()=>{}
     
 })
 

@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 const Box = (props) => {
   const cartCtx = useContext(CartContext)
   const item=props.item
+  console.log("item",item)
 
   const addToCart = ()=> {
     cartCtx.addItem(item)

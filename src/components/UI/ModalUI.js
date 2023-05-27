@@ -1,5 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
-import { Button, Container, Row } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 
 const ModalUI = (props)=> {
     const handleClose = props.ModalHandler
