@@ -12,14 +12,15 @@ let Store =  (props) => {
   const cartCtx=useContext(CartContext)
   const authCtx = useContext(AuthContext)
   const navigate = useNavigate()
-  const _id=localStorage.getItem('userID')
   useEffect( () => {
     async function fetchdata(){
       if(!authCtx.isLoggedIn){
         navigate("/Login",{replace:true})
+        console.log('navigated to login')
       }
       else{
         cartCtx.cartSync()
+        console.log("cartupdated")
       }
     }
    fetchdata();
@@ -45,7 +46,7 @@ let Store =  (props) => {
            {!isLoading&&products.length===0&& <ul>No Movies To Show</ul>}
            {error}  
         </Row>
-        {console.log('hi')}
+        {console.log('store rendered')}
       </Container>
     </>
   );

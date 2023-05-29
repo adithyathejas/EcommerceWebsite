@@ -5,10 +5,11 @@ import AuthContext from "./Auth-Context"
 import { useEffect } from "react"
 
 const CartProvider = props => {
+    const authCtx=useContext(AuthContext)
     const [items,setItems] = useState([])
     const [cartOpen,setCartOpen]=useState(false)
-    let email=localStorage.getItem('email')
-    let _id=localStorage.getItem('userID')
+    let email=authCtx.email
+    let _id=authCtx._id
     const CartHandler = () => {
         setCartOpen(!cartOpen)
       }
@@ -16,14 +17,17 @@ const CartProvider = props => {
     const cartSync=async ()=>{
         try{
 
-        
-            let response = await axios.get(`https://crudcrud.com/api/9a3c7c465c5a4ad695e97f7f29c54c80/Cart/${_id}`) 
+            console.log(_id)
+            let response = await axios.get(`https://crudcrud.com/api/0c2288e2b93241b6b8af2e0dc6f058bc/Cart/${_id}`) 
               setItems(response.data.items)
         }catch(e){
             console.log(e)
         }         
           }
-          
+
+    const emptyCart=()=>{
+        setItems([])
+    }
 
     
 
@@ -40,7 +44,7 @@ const CartProvider = props => {
              updatedItems=[...items.slice(0,ItemIndex),newItem,...items.slice(ItemIndex+1)]
         }
         try{
-            let response = await axios.put(`https://crudcrud.com/api/9a3c7c465c5a4ad695e97f7f29c54c80/Cart/${_id}`,{id:email,items:updatedItems})
+            let response = await axios.put(`https://crudcrud.com/api/0c2288e2b93241b6b8af2e0dc6f058bc/Cart/${_id}`,{id:email,items:updatedItems})
             console.log(response.data)
         }catch(e){
             console.error(e);
@@ -66,7 +70,7 @@ const CartProvider = props => {
                 updatedItems=[...items.slice(0,ItemIndex),...items.slice(ItemIndex+1)]
             }
             try{
-                let response = await axios.put(`https://crudcrud.com/api/9a3c7c465c5a4ad695e97f7f29c54c80/Cart/${_id}`,{id:email,items:updatedItems})
+                let response = await axios.put(`https://crudcrud.com/api/0c2288e2b93241b6b8af2e0dc6f058bc/Cart/${_id}`,{id:email,items:updatedItems})
                 console.log(response.data)
             }catch(e){
 
@@ -85,7 +89,8 @@ const CartProvider = props => {
             removeItem:removeItemFromHandler,
             cartState: cartOpen,
             CartHandle:CartHandler,
-            cartSync:cartSync
+            cartSync:cartSync,
+            emptyCart:emptyCart
 
             
         }

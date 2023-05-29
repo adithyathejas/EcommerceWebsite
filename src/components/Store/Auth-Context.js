@@ -1,40 +1,73 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import axios from 'axios'
-import { useEffect } from "react";
+import CartContext from "./Cart-Context";
+
 const AuthContext = React.createContext({
   token: "",
+  email:"",
+  _id:"",
   isLoggedIn: false,
   login: (token) => {},
   logout: () => {},
   timeoutCheck:()=>{}
 });
 
+
+
 export const AuthContextProvider = (props) => {
+  const cartCtx=useContext(CartContext)
   const initialToken=localStorage.getItem('token');
   const loggedInEmail=localStorage.getItem('email');
+  const initialID=localStorage.getItem('userID')
   const [token, setToken] = useState(initialToken);
   const [email,setEmail]=useState(loggedInEmail)
+  const [_id,setId]=useState(initialID)
   const userIsloggedIn = !!token;
-  const loginHandler = async (token,email) => {
-   //code to clean email
-   
-    //storing to localstorage
+  //function storing to localstorage and state
+  let setValue =(email,id,token)=>{
+    setId(id)
     setToken(token);
     setEmail(email);
-    localStorage.setItem('email',email) 
-    try{   
-        let response = await axios.post('https://crudcrud.com/api/9a3c7c465c5a4ad695e97f7f29c54c80/Cart',{id:email,items:[]})
-        let data=response.data
+    
+  }
+
+  const loginHandler = async (token,email) => { 
+    try{
+      let data 
+      let response = await axios.get('https://crudcrud.com/api/0c2288e2b93241b6b8af2e0dc6f058bc/Cart')
+      if(response.data.length==0){
+        let response = await axios.post('https://crudcrud.com/api/0c2288e2b93241b6b8af2e0dc6f058bc/Cart',{id:email,items:[]})
+        data=response.data 
+      }
+      else {
+        data= response.data
+        for(let i=0;i<data.length;i++){
+          if(data[i].id==email){
+            data=data[i]
+          }
+
+        }
+      }   
+        console.log("id updated",data._id)
+        await setValue(email,data._id,token)
+        localStorage.setItem('email',email)
         localStorage.setItem('userID',data._id)
+        localStorage.setItem('token',token)
+        
+        
     }
     catch(e){
       console.error(e.message)
     }
-    localStorage.setItem('token',token)
+    
+    return "completed"
   };
+
+
   const logoutHandler = () => {
-    setToken(null);
     localStorage.clear()
+    setValue(null,null,null)
+    cartCtx.emptyCart();
   };
   const timeoutHandler=()=>{
     let min=5*60*1000;
@@ -55,6 +88,7 @@ export const AuthContextProvider = (props) => {
   const contextValue = {
     token: token,
     email:email,
+    _id: _id,
     isLoggedIn: userIsloggedIn,
     login: loginHandler,
     logout: logoutHandler,

@@ -40,9 +40,9 @@ const NavBar = (props) => {
             <NavLink className="nav-link " to="About">
               About
             </NavLink>
-            <NavLink className="nav-link " to="Login">
+           {!islogin&& <NavLink className="nav-link " to="Login">
               Login
-            </NavLink>
+            </NavLink>}
             <NavLink className="nav-link " to="ContactUS">
               Contact US{" "}
             </NavLink>

@@ -8,7 +8,8 @@ const CartContext = React.createContext({
     removeItem:(id)=>{},
     cartState: null,
     CartHandle:()=>{},
-    cartSync:()=>{}
+    cartSync:()=>{},
+    emptyCart:()=>{}
     
 })
 
