@@ -12,6 +12,7 @@ import {
 
 import AuthContext from "../../Store/Auth-Context";
 import CartCtx from "../../Store/Cart-Context";
+import axios from "axios"
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ const LoginForm = () => {
 
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
    useEffect(()=>{
     if(authCtx.isLoggedIn){
       navigate('/Store')
@@ -98,7 +100,7 @@ const LoginForm = () => {
         if (res.ok) {
           res.json().then((data) => {
             console.log(data.idToken);
-            authCtx.login(data.idToken);
+            login(data);
             navigate("/", { replace: true });
           });
         } else {

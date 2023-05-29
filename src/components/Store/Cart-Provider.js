@@ -2,7 +2,7 @@ import {useState,useContext} from "react"
 import CartContext from "./Cart-Context"
 import axios from "axios"
 import AuthContext from "./Auth-Context"
-import { useEffect } from "react"
+
 
 const CartProvider = props => {
     const authCtx=useContext(AuthContext)
@@ -27,6 +27,7 @@ const CartProvider = props => {
 
     const emptyCart=()=>{
         setItems([])
+        console.log('cart emptied')
     }
 
     

@@ -1,11 +1,7 @@
 import CartItem from "./CartItem";
-import Modal from 'react-bootstrap/Modal';
-import { Button, Container, Row } from "react-bootstrap";
-import { useContext, useEffect, useState } from "react";
+import { useContext} from "react";
 import CartContext from "../Store/Cart-Context";
-import AuthContext from "../Store/Auth-Context";
 import ModalUI from "../UI/ModalUI";
-import axios from 'axios'
 
 
 const Cart = (props) => {
@@ -24,7 +20,7 @@ const Cart = (props) => {
 
 
     return (
-      <ModalUI ModalHandler={cartCtx.CartHandle} Show={cartCtx.cartState}>
+      <ModalUI ModalHandler={cartCtx.CartHandle} Show={cartCtx.cartState} emptyCart={cartCtx.emptyCart}>
           {CartItems}
          </ModalUI>
     )

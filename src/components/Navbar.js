@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -14,7 +14,7 @@ import AuthContext from "./Store/Auth-Context";
 const NavBar = (props) => {
   const cartCtx = useContext(CartContext);
   const authCtx = useContext(AuthContext);
-  const Logout = authCtx.logout;
+  const Logout =()=>{ authCtx.logout();cartCtx.emptyCart()}
   const islogin = authCtx.isLoggedIn
 
   let badgeNum = 0;

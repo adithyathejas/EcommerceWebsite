@@ -3,6 +3,7 @@ import { Button, Container } from "react-bootstrap";
 
 const ModalUI = (props)=> {
     const handleClose = props.ModalHandler
+    const emptyCart = props.emptyCart
    
    return (<Modal show={props.Show} onHide={handleClose}>
     <Modal.Header closeButton>
@@ -17,8 +18,8 @@ const ModalUI = (props)=> {
       <Button variant="secondary" onClick={handleClose}>
         Close
       </Button>
-      <Button variant="primary" onClick={handleClose}>
-        Save Changes
+      <Button variant="primary" onClick={emptyCart}>
+        empty cart
       </Button>
     </Modal.Footer>
   </Modal>

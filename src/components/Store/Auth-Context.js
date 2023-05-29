@@ -15,7 +15,6 @@ const AuthContext = React.createContext({
 
 
 export const AuthContextProvider = (props) => {
-  const cartCtx=useContext(CartContext)
   const initialToken=localStorage.getItem('token');
   const loggedInEmail=localStorage.getItem('email');
   const initialID=localStorage.getItem('userID')
@@ -44,9 +43,15 @@ export const AuthContextProvider = (props) => {
         for(let i=0;i<data.length;i++){
           if(data[i].id==email){
             data=data[i]
+            
           }
 
         }
+        
+        }
+        if(data._id==undefined){
+          let response = await axios.post('https://crudcrud.com/api/0c2288e2b93241b6b8af2e0dc6f058bc/Cart',{id:email,items:[]})
+          data=response.data 
       }   
         console.log("id updated",data._id)
         await setValue(email,data._id,token)
@@ -67,7 +72,7 @@ export const AuthContextProvider = (props) => {
   const logoutHandler = () => {
     localStorage.clear()
     setValue(null,null,null)
-    cartCtx.emptyCart();
+    
   };
   const timeoutHandler=()=>{
     let min=5*60*1000;
