@@ -1,13 +1,12 @@
 import React  from "react";
 import "./App.css";
 import Products from "./components/Pages/Products";
-import { useState, useRef, useEffect } from "react";
+import { useState} from "react";
 import Cart from "./components/Cart/Cart";
 import CartProvider from "./components/Store/Cart-Provider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import About from "./components/Pages/About";
 import Home from "./components/Pages/Home";
-import Button from "react-bootstrap/Button";
 import ContactUS from "./components/Pages/ContactUS";
 import Root from "./components/Pages/Root";
 import ErrorPage from "./components/Pages/ErrorPage";
@@ -19,9 +18,9 @@ const App = () => {
   // const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  // const [isCancelled,setIsCancelled]=useState(false)
-  const cancelled = useRef(false);
-  let timeoutID = useRef(0);
+  // // const [isCancelled,setIsCancelled]=useState(false)
+  // const cancelled = useRef(false);
+  // let timeoutID = useRef(0);
 
   const productsArr = [
     {
@@ -83,7 +82,7 @@ const App = () => {
         { path: "About", element: <About /> },
         { path: "Products", element: <Products products={productsArr} isLoading={isLoading} error={error}/>},
         { path: "ContactUS", element: <ContactUS/> },
-        {path: 'Store/:productId',element: <ProductDetail/>},
+        {path: 'Products/:productId',element: <ProductDetail/>},
         {path: "Login",element:<LoginForm/>}
       ],
      

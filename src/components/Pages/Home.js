@@ -36,7 +36,6 @@ const Home = (props)=>{
             <Card.Img variant="top" src={album.imageUrl} />
             <Card.Body>
               <Card.Title>{album.title}</Card.Title>
-              <Card.Text>Description of the album goes here.</Card.Text>
             </Card.Body>
           </Card>
         </Carousel.Item>

@@ -1,6 +1,6 @@
-import React, { useState,useContext } from "react";
+import React, { useState } from "react";
 import axios from 'axios'
-import CartContext from "./Cart-Context";
+
 
 const AuthContext = React.createContext({
   token: "",
@@ -23,6 +23,7 @@ export const AuthContextProvider = (props) => {
   const [_id,setId]=useState(initialID)
   const userIsloggedIn = !!token;
   //function storing to localstorage and state
+  
   let setValue =(email,id,token)=>{
     setId(id)
     setToken(token);
