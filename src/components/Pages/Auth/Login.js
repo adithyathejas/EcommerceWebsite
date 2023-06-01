@@ -27,7 +27,7 @@ const LoginForm = () => {
 
    useEffect(()=>{
     if(authCtx.isLoggedIn){
-      navigate('/Store')
+      navigate('/Products')
     }
    },[authCtx.isLoggedIn,authCtx._id])
 

@@ -8,7 +8,7 @@ import CartContext from "../Store/Cart-Context";
 import axios from 'axios'
 
 
-let Store =  (props) => {
+let Products =  (props) => {
   const cartCtx=useContext(CartContext)
   const authCtx = useContext(AuthContext)
   const navigate = useNavigate()
@@ -52,4 +52,4 @@ let Store =  (props) => {
   );
 };
 
-export default Store;
+export default Products;

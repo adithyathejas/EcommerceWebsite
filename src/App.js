@@ -1,6 +1,6 @@
 import React  from "react";
 import "./App.css";
-import Store from "./components/Pages/Store";
+import Products from "./components/Pages/Products";
 import { useState, useRef, useEffect } from "react";
 import Cart from "./components/Cart/Cart";
 import CartProvider from "./components/Store/Cart-Provider";
@@ -81,7 +81,7 @@ const App = () => {
         { path: "/", element: <Home /> },
         { path: "/Home", element: <Home /> },
         { path: "About", element: <About /> },
-        { path: "Store", element: <Store products={productsArr} isLoading={isLoading} error={error}/>},
+        { path: "Products", element: <Products products={productsArr} isLoading={isLoading} error={error}/>},
         { path: "ContactUS", element: <ContactUS/> },
         {path: 'Store/:productId',element: <ProductDetail/>},
         {path: "Login",element:<LoginForm/>}

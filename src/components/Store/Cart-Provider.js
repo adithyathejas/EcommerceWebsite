@@ -18,7 +18,7 @@ const CartProvider = props => {
         try{
 
             console.log(_id)
-            let response = await axios.get(`https://crudcrud.com/api/0c2288e2b93241b6b8af2e0dc6f058bc/Cart/${_id}`) 
+            let response = await axios.get(`https://crudcrud.com/api/14bc8c62d29e44ff8c66012e8474cffb/Cart/${_id}`) 
               setItems(response.data.items)
         }catch(e){
             console.log(e)
@@ -45,7 +45,7 @@ const CartProvider = props => {
              updatedItems=[...items.slice(0,ItemIndex),newItem,...items.slice(ItemIndex+1)]
         }
         try{
-            let response = await axios.put(`https://crudcrud.com/api/0c2288e2b93241b6b8af2e0dc6f058bc/Cart/${_id}`,{id:email,items:updatedItems})
+            let response = await axios.put(`https://crudcrud.com/api/14bc8c62d29e44ff8c66012e8474cffb/Cart/${_id}`,{id:email,items:updatedItems})
             console.log(response.data)
         }catch(e){
             console.error(e);
@@ -71,7 +71,7 @@ const CartProvider = props => {
                 updatedItems=[...items.slice(0,ItemIndex),...items.slice(ItemIndex+1)]
             }
             try{
-                let response = await axios.put(`https://crudcrud.com/api/0c2288e2b93241b6b8af2e0dc6f058bc/Cart/${_id}`,{id:email,items:updatedItems})
+                let response = await axios.put(`https://crudcrud.com/api/14bc8c62d29e44ff8c66012e8474cffb/Cart/${_id}`,{id:email,items:updatedItems})
                 console.log(response.data)
             }catch(e){
 

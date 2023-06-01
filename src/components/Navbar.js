@@ -26,7 +26,7 @@ const NavBar = (props) => {
   return (
     <Navbar variant="dark" bg="dark" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="#home">MOVIE ARCHEVE</Navbar.Brand>
+        <Navbar.Brand href="#home">Color Space</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav nav-tabs" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto ">
@@ -34,7 +34,7 @@ const NavBar = (props) => {
             <NavLink className="nav-link" to="Home">
               Home
             </NavLink>
-            <NavLink className="nav-link " to="Store">
+            <NavLink className="nav-link " to="Products">
               Products
             </NavLink>
             <NavLink className="nav-link " to="About">

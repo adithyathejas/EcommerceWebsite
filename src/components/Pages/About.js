@@ -6,7 +6,7 @@ const About = () => {
     <Container fluid>
         <Row className="text-bg-dark  text-center">
             <Col>
-            <h1 lg>The Movie Archeve</h1>
+            <h1 lg>The Color Space</h1>
             </Col>
         </Row>
         <Row className="m-3">
@@ -15,9 +15,8 @@ const About = () => {
             </Col>
             <Col xs="8" >   
             <h2 className="font-weight-bold">
-            Archeve is a movie library for cinema lovers. We obtain legal license to
-        show you the latest releases.We are an independent platform which allows
-        viewers to watch their favorite movie in the comfort of their home!
+           Color space is an online library for color band lovers. We sell official albums of
+         the color band. We are the only legal platform to buy color's official albums online!
             </h2>
         
             </Col> 

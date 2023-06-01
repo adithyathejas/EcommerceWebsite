@@ -33,9 +33,9 @@ export const AuthContextProvider = (props) => {
   const loginHandler = async (token,email) => { 
     try{
       let data 
-      let response = await axios.get('https://crudcrud.com/api/0c2288e2b93241b6b8af2e0dc6f058bc/Cart')
+      let response = await axios.get('https://crudcrud.com/api/14bc8c62d29e44ff8c66012e8474cffb/Cart')
       if(response.data.length==0){
-        let response = await axios.post('https://crudcrud.com/api/0c2288e2b93241b6b8af2e0dc6f058bc/Cart',{id:email,items:[]})
+        let response = await axios.post('https://crudcrud.com/api/14bc8c62d29e44ff8c66012e8474cffb/Cart',{id:email,items:[]})
         data=response.data 
       }
       else {
@@ -50,7 +50,7 @@ export const AuthContextProvider = (props) => {
         
         }
         if(data._id==undefined){
-          let response = await axios.post('https://crudcrud.com/api/0c2288e2b93241b6b8af2e0dc6f058bc/Cart',{id:email,items:[]})
+          let response = await axios.post('https://crudcrud.com/api/14bc8c62d29e44ff8c66012e8474cffb/Cart',{id:email,items:[]})
           data=response.data 
       }   
         console.log("id updated",data._id)

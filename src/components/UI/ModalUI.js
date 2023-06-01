@@ -18,9 +18,9 @@ const ModalUI = (props)=> {
       <Button variant="secondary" onClick={handleClose}>
         Close
       </Button>
-      <Button variant="primary" onClick={emptyCart}>
+      {/* <Button variant="primary" onClick={emptyCart}>
         empty cart
-      </Button>
+      </Button> */}
     </Modal.Footer>
   </Modal>
     );
